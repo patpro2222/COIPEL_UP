@@ -107,7 +107,8 @@ def _respaldo(db: BaseDatos) -> None:
 
     st.divider()
     st.markdown("**Restaurar datos de demostración**")
-    st.caption("Carga el catálogo, las 6 pólizas y los presupuestos de ejemplo. Descarga antes un respaldo si lo necesitas.")
+    st.caption("Carga el catálogo y la póliza de saldos iniciales del prototipo de sistema contable (sin presupuestos). "
+               "Descarga antes un respaldo si lo necesitas.")
     confirmar_demo = st.checkbox("Confirmo que deseo borrar mis datos y cargar la demostración", key="conf_demo")
     if st.button("♻️ Restaurar datos de demostración", disabled=not confirmar_demo, use_container_width=True):
         db.restaurar_demo()

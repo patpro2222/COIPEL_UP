@@ -71,10 +71,26 @@ empresa (clave/valor)  → razón social, RFC, domicilio para los encabezados de
   al Capital Contable.
 - **Semáforo presupuestal:** ingresos 🟢 ≥100 % · 🟡 90–99 % · 🔴 <90 %; gastos 🟢 <90 % · 🟡 90–100 % · 🔴 >100 %.
 
-### Datos de demostración (noviembre 2026)
-6 pólizas cuadradas de una PyME comercial: apertura, venta de contado, venta a crédito, compras y gastos,
-cobranza y ajuste (depreciación + ISR). Resultado: Ventas netas **$440,000.00**, Utilidad neta **$41,212.50**,
-Activo total **$2,619,275.00** = Pasivo **$863,062.50** + Capital **$1,756,212.50**.
+### Datos de demostración (prototipo de sistema contable, ejercicio 2026)
+Una póliza de saldos iniciales al **1 de enero de 2026** con las 22 cuentas del prototipo visto en clase.
+Sin presupuestos capturados (se agregan desde *Control presupuestal*).
+
+- El Capital Social se registra en **$8,803,350.00** para que la apertura cuadre; en el Excel original era
+  $7,467,035.00 y los saldos tenían una diferencia de $1,336,315.00.
+- *Otros gastos* y *Otros productos* se presentan dentro del Resultado Integral de Financiamiento (RIF).
+
+| Estado de Resultados | Importe |
+|---|---:|
+| Ventas | $2,260,000.00 |
+| (−) Costo de Ventas | $1,118,750.00 |
+| (=) Utilidad Bruta | $1,141,250.00 |
+| (−) Gastos de Operación (ventas + administración) | $530,000.00 |
+| (=) Utilidad de Operación | $611,250.00 |
+| (+/−) RIF (productos 200,000 + otros productos 120,000 − gastos 119,000 − otros gastos 328,000) | −$127,000.00 |
+| (=) Utilidad Neta | **$484,250.00** |
+
+Balance General: Activo circulante $7,550,400.00 + Activo no circulante $4,748,200.00 = **$12,298,600.00** =
+Pasivo $3,011,000.00 + Capital contable $9,287,600.00 (Capital Social + Utilidad Neta).
 
 ---
 

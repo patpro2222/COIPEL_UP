@@ -1,7 +1,2 @@
 id,fecha,tipo,concepto
-POL-001,2026-11-01,Diario,Asiento de apertura: saldos iniciales al 1 de noviembre
-POL-002,2026-11-05,Ingreso,Venta de contado según factura A-1050
-POL-003,2026-11-08,Diario,Venta a crédito a Grupo Industrial del Norte (factura A-1051)
-POL-004,2026-11-15,Egreso,Compra de mercancía y pago de gastos de operación
-POL-005,2026-11-22,Ingreso,Cobranza parcial a cliente y rendimientos bancarios
-POL-006,2026-11-30,Ajuste,Depreciación mensual y provisión de ISR
+POL-001,2026-01-01,Diario,Saldos iniciales según el prototipo de sistema contable
