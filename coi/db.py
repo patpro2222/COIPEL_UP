@@ -227,6 +227,17 @@ def validar_integridad(tablas: dict[str, pd.DataFrame]) -> list[str]:
     return errores
 
 
+def decodificar_csv(contenido: bytes) -> str:
+    """Lee CSV en UTF-8 y tolera renglones guardados en ANSI por Excel/Bloc de notas (cp1252)."""
+    lineas = []
+    for crudo in contenido.splitlines():
+        try:
+            lineas.append(crudo.decode("utf-8"))
+        except UnicodeDecodeError:
+            lineas.append(crudo.decode("cp1252", errors="replace"))
+    return "\n".join(lineas).lstrip("﻿")
+
+
 def _siguiente_folio(serie: pd.Series, prefijo: str, digitos: int, cuantos: int = 1) -> list[str]:
     numeros = serie.astype(str).str.extract(r"(\d+)$")[0].dropna().astype(int)
     inicio = int(numeros.max()) + 1 if len(numeros) else 1
@@ -264,7 +275,8 @@ class BaseDatos:
     def _leer_csv(ruta: Path, nombre: str) -> pd.DataFrame:
         if not ruta.exists():
             return tabla_vacia(nombre)
-        df = pd.read_csv(ruta, dtype=str, keep_default_na=False, encoding="utf-8-sig")
+        texto = decodificar_csv(ruta.read_bytes())
+        df = pd.read_csv(io.StringIO(texto), dtype=str, keep_default_na=False)
         return normalizar(nombre, df)
 
     def _cargar_de(self, carpeta: Path) -> dict[str, pd.DataFrame]:
@@ -608,10 +620,8 @@ class BaseDatos:
                 por_nombre = {Path(n).name: n for n in zf.namelist()}
                 for nombre, cfg in ESQUEMA.items():
                     if cfg["archivo"] in por_nombre:
-                        datos = zf.read(por_nombre[cfg["archivo"]])
-                        crudas[nombre] = pd.read_csv(
-                            io.BytesIO(datos), dtype=str, keep_default_na=False, encoding="utf-8-sig"
-                        )
+                        datos = decodificar_csv(zf.read(por_nombre[cfg["archivo"]]))
+                        crudas[nombre] = pd.read_csv(io.StringIO(datos), dtype=str, keep_default_na=False)
         elif extension == ".json":
             datos = json.loads(contenido.decode("utf-8-sig"))
             for nombre in ESQUEMA:

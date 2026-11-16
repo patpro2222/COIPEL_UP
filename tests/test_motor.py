@@ -168,6 +168,15 @@ def test_admin_presentacion_y_ajuste():
     assert validar_integridad(db.tablas) == []
 
 
+def test_csv_editado_en_excel_ansi():
+    db = _bd()
+    ruta = db.ruta("catalogoCuentas")
+    contenido = ruta.read_bytes().decode("utf-8-sig").replace("Bancos Nacionales", "Bancos Bajío")
+    ruta.write_bytes(contenido.encode("cp1252"))  # como lo guarda Excel en Windows
+    db2 = BaseDatos(db.dir)
+    assert "Bancos Bajío" in set(db2.tablas["catalogoCuentas"]["nombre"])
+
+
 if __name__ == "__main__":
     pruebas = [v for k, v in dict(globals()).items() if k.startswith("test_")]
     for prueba in pruebas:
